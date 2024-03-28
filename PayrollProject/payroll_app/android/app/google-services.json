@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "144710063111",
+    "project_id": "the-payroll-system",
+    "storage_bucket": "the-payroll-system.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:144710063111:android:7e7f3726f2cf59e98cc6a2",
+        "android_client_info": {
+          "package_name": "com.payroll.payroll_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeaKte7Cdm4aM5p-n8XDL0YCOizO5Nwpo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
