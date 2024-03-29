@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:payroll_app/firebase_options.dart';
 import 'package:payroll_app/src/features/authentication/screens/splash_screen/splash_screen.dart';
 import 'package:payroll_app/src/repository/authentication/authentication_repository.dart';
+import 'package:payroll_app/src/routing/route.dart';
 import 'package:payroll_app/src/utils/theme/theme.dart';
 
 void main() async {
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
+      
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }

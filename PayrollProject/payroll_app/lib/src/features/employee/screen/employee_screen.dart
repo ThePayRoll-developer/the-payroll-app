@@ -32,59 +32,61 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
   Widget build(BuildContext context) {
     // final controller = Get.put(ProfileController());
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.all(10.0),
-        child: FutureBuilder(
-          future: emp,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              if (snapshot.hasData) {
-                Employee emp = snapshot.data as Employee;
-                return SizedBox(
-                  width: 120,
-                  height: 120,
-                  child: Column(
-                    children: [
-                      Text(emp.name!,
-                        style: Theme.of(context).textTheme.headlineMedium,
-                      ),
-                      const SizedBox(
-                        height: 3.0,
-                      ),
-                      Text(
-                        emp.gender!,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),const SizedBox(
-                        height: 3.0,
-                      ),
-                      Text(
-                        emp.joiningDate!,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),const SizedBox(
-                        height: 3.0,
-                      ),
-                      Text(
-                        emp.email!,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                    ],
-                  ),
-                );
-              } else if (snapshot.hasError) {
-                return Center(
-                  child: Text(snapshot.error.toString()),
-                );
+      body: Center(
+        child: Container(
+          padding: EdgeInsets.all(5.0),
+          child: FutureBuilder(
+            future: emp,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasData) {
+                  Employee emp = snapshot.data as Employee;
+                  return SizedBox(
+                    width: 120,
+                    height: 120,
+                    child: Column(
+                      children: [
+                        Text(emp.name!,
+                          style: Theme.of(context).textTheme.headlineMedium,
+                        ),
+                        const SizedBox(
+                          height: 3.0,
+                        ),
+                        Text(
+                          emp.gender!,
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),const SizedBox(
+                          height: 3.0,
+                        ),
+                        Text(
+                          emp.joiningDate!,
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),const SizedBox(
+                          height: 3.0,
+                        ),
+                        Text(
+                          emp.email!,
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      ],
+                    ),
+                  );
+                } else if (snapshot.hasError) {
+                  return Center(
+                    child: Text(snapshot.error.toString()),
+                  );
+                } else {
+                  return const Center(
+                    child: Text("Something went wrong."),
+                  );
+                }
               } else {
                 return const Center(
-                  child: Text("Something went wrong."),
+                  child: CircularProgressIndicator(),
                 );
               }
-            } else {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          },
+            },
+          ),
         ),
       ),
     );
