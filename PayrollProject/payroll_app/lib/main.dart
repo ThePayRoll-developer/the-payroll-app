@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_app/firebase_options.dart';
 import 'package:payroll_app/src/features/authentication/screens/splash_screen/splash_screen.dart';
+import 'package:payroll_app/src/repository/authentication/authentication_repository.dart';
 import 'package:payroll_app/src/utils/theme/theme.dart';
 
-
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform).then(
+    (value) => Get.put(AuthenticationRepository()),
+  );
   runApp(const MyApp());
 }
 
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
+      title: 'PayRoll',
       theme: TAppTheme.lightTheme,
       darkTheme: TAppTheme.darkTheme,
       themeMode: ThemeMode.system,
