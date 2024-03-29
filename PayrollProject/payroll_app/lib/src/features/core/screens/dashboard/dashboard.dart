@@ -5,6 +5,7 @@ import 'package:payroll_app/src/constants/colors.dart';
 import 'package:payroll_app/src/constants/sizes.dart';
 import 'package:payroll_app/src/constants/text_strings.dart';
 import 'package:payroll_app/src/features/core/screens/profile/profile_screen.dart';
+import 'package:payroll_app/src/features/employee/screen/employee_screen.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});
@@ -140,6 +141,20 @@ class Dashboard extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: OutlinedButton(onPressed: () {}, child: const Text("Salary"),),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  Expanded(
+                    child:
+                    SizedBox(
+                      width: double.infinity,
+
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: OutlinedButton(onPressed: () {
+                          Get.to(()=> EmployeeScreen());
+                        }, child: const Text("Employee"),),
                       ),
                     ),
                   ),

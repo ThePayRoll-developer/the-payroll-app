@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:payroll_app/src/constants/colors.dart';
+import 'package:payroll_app/src/constants/image_strings.dart';
 import 'package:payroll_app/src/constants/sizes.dart';
 import 'package:payroll_app/src/constants/text_strings.dart';
 import 'package:payroll_app/src/features/authentication/models/user_model.dart';
@@ -28,7 +29,7 @@ class UpdateProfileScreen extends StatelessWidget {
           padding: const EdgeInsets.all(tDefaultSize),
           child: FutureBuilder(
               future: controller.getUserData(),
-              builder: (context, snapshot){
+              builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasData) {
                     UserModel userData = snapshot.data as UserModel;
@@ -41,9 +42,11 @@ class UpdateProfileScreen extends StatelessWidget {
                               width: 120,
                               height: 120,
                               child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(100),
-                                  child: const Icon(
-                                      LineAwesomeIcons.person_entering_booth)),
+                                borderRadius: BorderRadius.circular(100),
+                                child: const Image(
+                                  image: AssetImage(tProfileImage),
+                                ),
+                              ),
                             ),
                             Positioned(
                               bottom: 0,
@@ -154,16 +157,21 @@ class UpdateProfileScreen extends StatelessWidget {
                         ),
                       ],
                     );
-                  } else if(snapshot.hasError){
-                    return Center(child: Text(snapshot.error.toString()),);
-                  }else{
-                    return const Center(child: Text("Something went wrong."),);
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text(snapshot.error.toString()),
+                    );
+                  } else {
+                    return const Center(
+                      child: Text("Something went wrong."),
+                    );
                   }
-                } else{
-                  return const Center(child: CircularProgressIndicator(),);
+                } else {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
                 }
-              }
-              ),
+              }),
         ),
       ),
     );

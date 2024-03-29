@@ -10,3 +10,5 @@ const String tWelcomeScreenImage = "assets/images/welcome_images/welcome-screen-
 
 // -- Login & SignUp Images
 const String tGoogleLogoImage = "assets/images/logo/google-logo.png";
+// -- Profile image
+const String tProfileImage = "assets/images/profile/profile.png";
