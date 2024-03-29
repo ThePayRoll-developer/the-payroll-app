@@ -2,7 +2,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:payroll_app/firebase_options.dart';
+import 'package:payroll_app/src/features/advance/screen/advance_screen.dart';
 import 'package:payroll_app/src/features/authentication/screens/splash_screen/splash_screen.dart';
+import 'package:payroll_app/src/features/bonus/screen/bonus_screen.dart';
+import 'package:payroll_app/src/features/core/screens/dashboard/dashboard.dart';
+import 'package:payroll_app/src/features/leave/screen/leave_screen.dart';
 import 'package:payroll_app/src/repository/authentication/authentication_repository.dart';
 import 'package:payroll_app/src/routing/route.dart';
 import 'package:payroll_app/src/utils/theme/theme.dart';
@@ -28,7 +32,13 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
-      
+      initialRoute: '/',
+      getPages: [
+        GetPage(name: '/', page:()=> Dashboard()),
+        GetPage(name: '/bonus', page:()=> BonusScreen()),
+        GetPage(name: '/advance', page:()=> AdvanceScreen()),
+        GetPage(name: '/leave', page:()=> LeaveScreen()),
+      ],
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }

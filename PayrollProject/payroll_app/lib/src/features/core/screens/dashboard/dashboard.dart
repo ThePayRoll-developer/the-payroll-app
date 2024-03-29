@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:payroll_app/src/constants/colors.dart';
 import 'package:payroll_app/src/constants/sizes.dart';
 import 'package:payroll_app/src/constants/text_strings.dart';
+import 'package:payroll_app/src/features/attendance/screen/attendance_screen.dart';
 import 'package:payroll_app/src/features/core/screens/profile/profile_screen.dart';
 import 'package:payroll_app/src/features/employee/screen/employee_screen.dart';
 
@@ -66,7 +67,9 @@ class Dashboard extends StatelessWidget {
 
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: OutlinedButton(onPressed: () {}, child: const Text("Attendance")),
+                        child: OutlinedButton(onPressed: () {
+                          Get.to(()=> AttendanceScreen());
+                        }, child: const Text("Attendance")),
                       ),
                     ),
                   ),
@@ -98,7 +101,9 @@ class Dashboard extends StatelessWidget {
 
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: OutlinedButton(onPressed: () {}, child: const Text("Bonus")),
+                        child: OutlinedButton(onPressed: () {
+                          Get.toNamed('/bonus');
+                        }, child: const Text("Bonus")),
                       ),
                     ),
                   ),
@@ -110,7 +115,9 @@ class Dashboard extends StatelessWidget {
 
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: OutlinedButton(onPressed: () {}, child: const Text("Advance")),
+                        child: OutlinedButton(onPressed: () {
+                          Get.toNamed('/advance');
+                        }, child: const Text("Advance")),
                       ),
                     ),
                   ),
@@ -128,7 +135,9 @@ class Dashboard extends StatelessWidget {
 
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: OutlinedButton(onPressed: () {}, child: const Text("Leave"),),
+                        child: OutlinedButton(onPressed: () {
+                          Get.toNamed('/leave');
+                        }, child: const Text("Leave"),),
                       ),
                     ),
                   ),
