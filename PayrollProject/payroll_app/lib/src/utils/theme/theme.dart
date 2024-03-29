@@ -1,31 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:payroll_app/src/utils/theme/widget_theme/elevated_button_theme.dart';
+import 'package:payroll_app/src/utils/theme/widget_theme/outlined_button_theme.dart';
+import 'package:payroll_app/src/utils/theme/widget_theme/text_formfield_theme.dart';
+import 'package:payroll_app/src/utils/theme/widget_theme/text_theme.dart';
 
 class TAppTheme{
   TAppTheme._();
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
-    textTheme: TextTheme(
-      displayMedium: GoogleFonts.montserrat(
-        color: Colors.black87,
-      ),
-      titleSmall: GoogleFonts.poppins(
-        color: Colors.black54,
-        fontSize:24,
-      ),
-    ),
+    textTheme: TTextTheme.lightTextTheme,
+    outlinedButtonTheme: TOutlinedButtonTheme.lightOutlinedButtonTheme,
+    elevatedButtonTheme: TElevatedButtonTheme.lightElevatedButtonTheme,
+    inputDecorationTheme: TTextFormFieldTheme.lightInputDecorationTheme,
   );
   static ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
-    textTheme: TextTheme(
-      displayMedium: GoogleFonts.montserrat(
-        color: Colors.white70,
-      ),
-      titleSmall: GoogleFonts.poppins(
-        color: Colors.white60,
-        fontSize:24,
-      ),
-    ),
+    textTheme: TTextTheme.darkTextTheme,
+    outlinedButtonTheme: TOutlinedButtonTheme.darkOutlinedButtonTheme,
+    elevatedButtonTheme: TElevatedButtonTheme.darkElevatedButtonTheme,
+    inputDecorationTheme: TTextFormFieldTheme.darkInputDecorationTheme,
   );
 }
 

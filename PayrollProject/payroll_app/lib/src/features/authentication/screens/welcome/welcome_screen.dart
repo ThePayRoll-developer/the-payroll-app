@@ -1,18 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:payroll_app/src/constants/colors.dart';
 import 'package:payroll_app/src/constants/image_strings.dart';
 import 'package:payroll_app/src/constants/sizes.dart';
 import 'package:payroll_app/src/constants/text_strings.dart';
+import 'package:payroll_app/src/features/authentication/screens/login/login_screen.dart';
+import 'package:payroll_app/src/features/authentication/screens/signup/signup_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
+    var mediaQuery =MediaQuery.of(context);
+    var height = mediaQuery.size.height;
+    var brightness = mediaQuery.platformBrightness;
+    final isDarkMode = brightness == Brightness.dark;
     return Scaffold(
+      // backgroundColor: tPrimaryColor,
+      backgroundColor: isDarkMode ? tSecondaryColor : tPrimaryColor,
       body: Container(
         padding: EdgeInsets.all(tDefaultSize),
         child: Column(
@@ -39,14 +47,10 @@ class WelcomeScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () {},
-                    style: OutlinedButton.styleFrom(
-                      shape: RoundedRectangleBorder(),
-                      foregroundColor: tWhiteColor,
-                      side: BorderSide(color: tSecondaryColor),
-                      padding: EdgeInsets.symmetric(vertical: tButtonHeight)
-                    ),
-                    child: Text(tLogin),
+                    onPressed: () {
+                      Get.to(()=> const LoginScreen());
+                    },
+                    child: Text(tLogin.toUpperCase()),
                   ),
                 ),
                 const SizedBox(
@@ -54,15 +58,10 @@ class WelcomeScreen extends StatelessWidget {
                 ),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(),
-                        foregroundColor: tWhiteColor,
-                        backgroundColor: tSecondaryColor,
-                        side: BorderSide(color: tSecondaryColor),
-                        padding: EdgeInsets.symmetric(vertical: tButtonHeight)
-                    ),
-                    child: Text(tSignup),
+                    onPressed: () {
+                      Get.to(()=> SignUpScreen());
+                    },
+                    child: Text(tSignup.toUpperCase()),
                   ),
                 ),
               ],
