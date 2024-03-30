@@ -4,6 +4,7 @@ package com.shohab.CreateApi.services;
 import com.shohab.CreateApi.model.Advance;
 import com.shohab.CreateApi.model.Bonus;
 import com.shohab.CreateApi.model.Employee;
+import com.shohab.CreateApi.model.Salary;
 import com.shohab.CreateApi.repository.AdvanceRepository;
 import com.shohab.CreateApi.repository.BonusRepository;
 import com.shohab.CreateApi.repository.SalaryRepository;
@@ -63,6 +64,11 @@ public class SalaryService {
         }
         return totalBonusAmount;
     }
+
+    public List<Salary>getAllSalary(){
+        return  salaryRepository.findAll();
+    }
+
 
 
 
