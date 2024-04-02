@@ -1,0 +1,21 @@
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25vh;
+}
+
+/* Form Text */
+.form-control {
+    font-size: 14px;
+}
+
+/* Table Data */
+table.table td {
+    font-size: 14px;
+    padding: 0.5rem;
+}
+.mb-4{
+    margin-bottom: 0.5rem;
+    margin-top: 0.7rem;
+}
