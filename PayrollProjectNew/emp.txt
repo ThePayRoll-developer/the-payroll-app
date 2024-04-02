@@ -1,0 +1,7 @@
+# id	contact		email			pass		gender	joining_date	name		       salary	department_id
+3	01234567890	shohab@example.com	shohab@0	male	2022-01-01	Shohab Shikdar	        50000	1
+4	01144454545	anis@gmail.com		anis@0		male	2024-02-12	Anis Rahman	        25000	3
+5	01369546464	taskinhasan@gmail.com	taskin@0	male	2024-02-20	Taskin Hasan	        23000	2
+6	01303686210	tameem@gmail.com	tameem@0	male	2024-02-21	Tameem Islam	        15000	2
+7	01303686210	tahmid@gmail.com	tahmid@		male	2024-02-14	Tahmid Haque	        15000	2
+8	01839465689	fatema7@gmail.com	fatema7@	female	2024-02-14	Fatema Tuz Zohora	50000	1
