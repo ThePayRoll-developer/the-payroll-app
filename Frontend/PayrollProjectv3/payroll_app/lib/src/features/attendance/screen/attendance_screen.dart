@@ -83,7 +83,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
 
 
   Widget buildAttendance(List<Attendance> attendance) {
-    final f = DateFormat('yyyy-MM-dd hh:mm');
+    final f = DateFormat('yyyy-MM-dd hh:mm:ss a');
     return Container(
       alignment: Alignment.center,
       padding: const EdgeInsets.all(50.0),
