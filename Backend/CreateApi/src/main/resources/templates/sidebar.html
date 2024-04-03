@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sidebar Redesign</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+        crossorigin="anonymous">
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-xrKLy4Z6sncD2I0fOz/9LLFR15jaP5bPdOwDmHBHi+buMOonuY5ll5c5F1/Cn8Iq/Nl3hNOAr5rYT9l8sSjOMw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  <link rel="stylesheet" href="./assets/css/sidebar.css">
+</head>
+
+<body>
+
+<div class="sidenav">
+  <!-- <a th:href="@{/dashboard}"><i class="fas fa-home home-icon"></i> Home</a> -->
+  <a href="/employee/addform"><i class="fas fa-users employee-icon"></i> Employee</a>
+  <a href="/department/addform"><i class="fas fa-building department-icon"></i> Departments</a>
+  <a href="/attendance"><i class="far fa-calendar-alt attendance-icon"></i> Attendance</a>
+  <a href="/advance"><i class="fas fa-hand-holding-usd advance-icon"></i> Advance</a>
+  <a href="/bonus/addform"><i class="fas fa-gift bonus-icon"></i> Bonus</a>
+<!--  <a href="/leave"><i class="fas fa-leaf leaves-icon"></i> Leaves</a>-->
+  <a href="/leave"><i class="fas fa-th-list allleaves-icon"></i> All Leaves</a>
+  <a href="/salary/addform"><i class="fas fa-money-bill-wave salary-icon"></i> Salary</a>
+<!--  <a href="@{/emp_details}"><i class="fas fa-address-card emp-details-icon"></i> Employee Detail</a>-->
+</div>
+
+<!-- Page content -->
+<div class="main">
+<!--  <div th:replace="fragments/content :: main-content"></div>-->
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+        integrity="sha384-06fwefnKnhYzm3uoX3sYPpK3w3/nDRl0tqjt5z8HJCY8iK+jQGUp3FkzKgviyUoL"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shCk+2l5dLev+6mGg"></script>
+
+</body>
+
+</html>

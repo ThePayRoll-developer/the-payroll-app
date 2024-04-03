@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Centered Form and Table</title>
+    <!-- Bootstrap CSS -->
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+          rel="stylesheet">
+    <style>
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 90vh;
+            margin-top: 10px; /* Adjusted margin */
+        }
+
+        /* Form Text */
+        .form-control {
+            font-size: 14px;
+        }
+
+        /* Table Data */
+        table.table td {
+            font-size: 13px;
+            padding: 0.5rem; /* Adjusted padding */
+        }
+
+        /* Adjusted margin for table */
+        .mt-2 {
+            margin-top: 5px ; /* Adjusted margin */
+        }
+    </style>
+
+</head>
+
+<body>
+<aside >
+    <div th:insert="~{sidebar.html}" ></div>
+</aside>
+
+<div class="container">
+    <!-- Form Section -->
+    <div class="row">
+        <div class="col">
+            <h2 class="text-center mb-4">Employee Form</h2>
+            <div class="form-container">
+                <form method="post" th:action="@{/employee/save}" th:object="${employee}">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="">Name</label>
+                            <input class="form-control" id="name" name="name" th:field="*{name}" type="text">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="email">Email</label>
+                            <input class="form-control" id="email" name="email" th:field="*{email}" type="email">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="joiningDate">Joining Date</label>
+                            <input class="form-control" id="joiningDate" name="joiningDate" th:field="*{joiningDate}"
+                                   type="date">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="contact">Contact</label>
+                            <input class="form-control" id="contact" name="contact" th:field="*{contact}"
+                                   type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Gender</label><br>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" id="male" name="gender" th:checked="${employee.gender eq 'male'}" type="radio"
+                                   value="male">
+                            <label class="form-check-label" for="male">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" id="female" name="gender" th:checked="${employee.gender eq 'female'}" type="radio"
+                                   value="female">
+                            <label class="form-check-label" for="female">Female</label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="department">Department:</label>
+                            <select class="form-control" id="department" name="department"
+                                    th:field="*{department}">
+                                <option th:each="dept : ${deplist}" th:text="${dept.deptName}"
+                                        th:value="${dept.id}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="salary">Salary</label>
+                            <input class="form-control" id="salary" name="salary" th:field="*{salary}"
+                                   type="text">
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-secondary mx-2" type="reset">Reset</button>
+                        <button class="btn btn-success mx-2" type="submit">Save</button>
+                        <button class="btn btn-warning mx-2" type="button">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Table Section -->
+    <div class="row mt-2">
+        <div class="col">
+            <table class="table table-bordered table-striped">
+                <thead class="text-center">
+                <tr>
+                    <th>ID</th>
+                    <th>Employee Name</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>Department</th>
+                    <th>Gender</th>
+                    <th>Salary</th>
+                    <th>Joining Date</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="employee : ${employeeList}">
+                    <td th:text="${employee.id}"></td>
+                    <td th:text="${employee.name}"></td>
+                    <td th:text="${employee.email}"></td>
+                    <td th:text="${employee.contact}"></td>
+                    <td th:text="${employee.department?.deptName}"></td>
+                    <td th:text="${employee.gender}"></td>
+                    <td th:text="${employee.salary}"></td>
+                    <td th:text="${employee.joiningDate}"></td>
+                    <td>
+                        <button class="btn btn-warning btn-sm mx-1" th:href="@{/employee/edit/{id}(id=${employee.id})}">Update</button>
+                        <button class="btn btn-danger btn-sm mx-1" th:href="@{/employee/delete/{id}(id=${employee.id})}">Delete</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+        integrity="sha384-UYDnJv5BbAi5aLeZrCDtF3WwQI67tuGhj65qLOhFpUjrGC8NQpZlyIePSWBpYvWP"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7J..."
+        crossorigin="anonymous"></script>
+

@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Employee and Salary Management</title>
+    <!-- Bootstrap CSS -->
+    <link crossorigin="anonymous"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet"
+          th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css}">
+    <style>
+        /* Smaller text size for the entire body */
+        body {
+            font-size: 14px;
+        }
+
+        /* Minimalistic table */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        /* Centered heading */
+        .center-heading {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+<aside >
+    <div th:insert="~{sidebar.html}" ></div>
+</aside>
+<div class="container">
+    <!-- Employees Details Table -->
+    <div class="row">
+        <div class="col-12">
+            <h2 class="text-primary center-heading mb-3">Employees Details</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Employee Name</th>
+                    <th>Salary</th>
+                    <th>Bonus</th>
+                    <th>Advance</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="row, i : ${empList}">
+                    <td th:text="${i.index + 1}"></td>
+                    <td th:text="${row[0]}"></td>
+                    <td th:text="${row[1]}"></td>
+                    <td th:text="${row[2]}"></td>
+                    <td th:text="${row[3]}"></td>
+                    <td>
+
+
+                        <button class="btn btn-warning mx-1"
+                                onclick="onFromDataSet(this.getAttribute('data-name'), this.getAttribute('data-salary'), this.getAttribute('data-bonus'), this.getAttribute('data-advance'))"
+                                th:attr="data-name=${row[0]}, data-salary=${row[1]}, data-bonus=${row[2]}, data-advance=${#lists.size(row) >= 4} ? ${row[3]} : null">
+                            Salary Pass
+                        </button>
+
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+<!--    <form th:id="addSalaryForm">-->
+        <div class="row mt-4">
+            <div class="col-12">
+                <h2 class="text-primary center-heading mb-3">Add Salary</h2>
+                <form th:id="addSalaryForm"  method="post" th:action="@{/salary/salary_save}" th:object="${empSalary}">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label th:for="employee">Employee Name:</label>
+                                <input class="form-control" name="employee" th:field="*{employee.name}" th:id="empname"
+                                       type="text"/>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label th:for="amount">Salary:</label>
+                                <input class="form-control" th:field="*{amount}" th:id="basicsalary" type="text"/>
+                            </div>
+                        </div>
+                        <div class="row col-md-12">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Month</label>
+                                    <select class="form-select" id="workingDays" onchange="monthSelect()">
+                                        <option value="January">January</option>
+                                        <option value="February">February</option>
+                                        <option value="March">March</option>
+                                        <!-- Add more options for other months as needed -->
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row col-md-8">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label th:for="empworkingdays">Working Days</label>
+                                        <input class="form-control" id="empworkingdays" th:field="*{empworkingdays}"
+                                               type="text"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label th:for="empPresent">Present Days</label>
+                                    <input class="form-control" onclick="getTotalPresentDays()" th:field="*{empPresent}"
+                                           th:id="totalPresent" type="text"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <!--                                <div class="form-group">-->
+                                <!--                                    <label th:for="empLeaves">Granted Leaves</label>-->
+                                <!--                                    <input class="form-control" placeholder="0" readonly="readonly"-->
+                                <!--                                           th:field="*{empLeaves}"-->
+                                <!--                                           type="text" value="0"/>-->
+                                <!--                                </div>-->
+                                <!-- Inside the form where you want to display the count of granted leaves -->
+                                <div class="form-group">
+                                    <label th:for="empLeaves">Granted Leaves</label>
+                                    <!-- Use Thymeleaf expression to display the count of granted leaves -->
+                                    <input class="form-control" onclick="getTotalleaveDays()" placeholder="0"
+                                           readonly="readonly" th:field="*{empLeaves}" th:id="totalLeave"
+                                           type="text"/>
+                                </div>
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label th:for="empabsent">Absent Days</label>
+                                    <input class="form-control" onclick="getTotalAbsentDays()" th:field="*{empabsent}"
+                                           th:id="absentDays"
+                                           type="text"/>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label th:for="empBonus">Bonus:</label>
+                                <input class="form-control" th:field="*{empBonus}" th:id="bonus" type="text"/>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label th:for="advance">Advance:</label>
+                                <input class="form-control" th:field="*{empAdvance}" th:id="advance" type="text"/>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label th:for="empFines">Fine:</label>
+                                <input class="form-control" th:field="*{empFines}" th:id="fined" type="text"/>
+                                <span class="fs-5 text-secondary">50 tk fined per day</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label th:for="totalSalary">Total Salary:</label>
+                                <input class="form-control" onclick="calculate()" th:field="*{totalSalary}"
+                                       th:id="salary"
+                                       type="text"/>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label th:for="date">Date:</label>
+                                <input class="form-control" th:field="*{date}" type="date"/>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Buttons -->
+                    <div class="text-center">
+                        <button class="btn btn-secondary mr-2" type="reset">Reset</button>
+                        <button class="btn btn-success" type="submit">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+<!--    </form>-->
+
+    Salary Details Table
+    <div class="row mt-4">
+        <div class="col-12">
+            <h2 class="text-primary center-heading mb-3">Salary Details</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Employee Name</th>
+                    <th>Amount</th>
+                    <th>Bonus(+)</th>
+                    <th>Advance(-)</th>
+                    <th>Total Amount</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="row : ${salaryList}">
+                    <td th:text="${row.id}"></td>
+                    <td th:text="${row.employee?.name}"></td>
+                    <td th:text="${row.amount}"></td>
+                    <td th:text="${row.empBonus}"></td>
+                    <td th:text="${row.empAdvance}"></td>
+                    <td th:text="${row.totalSalary}"></td>
+                    <td th:text="${row.date}"></td>
+                    <!--                        <td>-->
+                    <!--                            <button class="btn btn-warning mx-1"-->
+                    <!--                                    th:onclick="'onEdit(\'' + ${row} + '\')'">Update</button>-->
+                    <!--                            <button class="btn btn-danger mx-1"-->
+                    <!--                                    th:onclick="'deleteSalary(\'' + ${row.id} + '\')'">Delete</button>-->
+                    <!--                        </td>-->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    window.onFromDataSet = function onFromDataSet(name, salary, bonus, advance) {
+        var salariesForm = document.querySelector('#addSalaryForm');
+        salariesForm.querySelector('[name="employee.name"]').value = name;
+        salariesForm.querySelector('[name="amount"]').value = salary;
+        salariesForm.querySelector('[name="empBonus"]').value = bonus;
+        salariesForm.querySelector('[name="empAdvance"]').value = advance;
+    }
+</script>
+
+
+<script type="text/javascript">
+    function monthSelect() {
+        var selectElement = document.getElementById("workingDays").value;
+        var selectedMonth = selectElement.value;
+        var workingDaysInput = document.getElementById("empworkingdays");
+        // workingDaysInput.value = "30";
+        console.log(selectElement);
+
+
+        // Check if workingDaysInput exists before setting its value
+        if (workingDaysInput) {
+            // Set the value of the input based on the selected month
+            if (selectElement === "January") {
+                workingDaysInput.value = 30;
+                console.log(workingDaysInput);
+            } else if (selectElement === "February") {
+                workingDaysInput.value = 28;
+                console.log(workingDaysInput);
+            } else if (selectElement === "March") {
+                workingDaysInput.value = 31;
+                console.log(workingDaysInput);
+            }
+            // Add more conditions for other months as needed
+        } else {
+            console.error("Element with ID 'empworkingdays' not found.");
+        }
+
+
+    }
+
+</script>
+
+<!-- Inside the HTML body -->
+
+<script>
+    function getTotalleaveDays(empname, month) {
+        // Create a new XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
+        var leaveDaysInput = document.getElementById("totalLeave");
+        // var absentDaysInput = document.getElementById("absentDays");
+        var presentDaysInput = document.getElementById("totalPresent");
+        var workingDaysInput = document.getElementById("empworkingdays");
+        empname = document.getElementById("empname").value;
+        var selectElement = document.getElementById("workingDays").value;
+        if (selectElement === "January") {
+            month = 01;
+            console.log(month);
+        } else if (selectElement === "February") {
+            month = 02;
+            console.log(month);
+        } else if (selectElement === "March") {
+            month = 03;
+            console.log(month);
+        }
+        // http://localhost:8086/api/leave/count?empname=Anis&month=02
+        // Define the request URL with parameters
+        var url = '/api/leave/flutter/count?empname=' + encodeURIComponent(empname) + '&month=' + encodeURIComponent(month);
+
+        // Configure the request
+        xhr.open('GET', url);
+
+        // Set up event handler for when the request is complete
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Request was successful, handle the response
+                var totalLeaveDays = xhr.responseText;
+                leaveDaysInput.value = totalLeaveDays;
+                // var result=workingDaysInput.value-(presentDaysInput.value+leaveDaysInput.value);
+                console.log('Total leave days:', totalLeaveDays);
+                // You can do further processing with the result here
+            } else {
+                // Request failed, handle the error
+                console.error('Error:', xhr.statusText);
+            }
+        };
+
+        // Set up event handler for network errors
+        xhr.onerror = function () {
+            console.error('Request failed');
+        };
+
+        // Send the request
+        xhr.send();
+    }
+
+</script>
+<script>
+    function getTotalPresentDays(empname, month) {
+        // Create a new XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
+        var presentDaysInput = document.getElementById("totalPresent");
+        empname = document.getElementById("empname").value;
+        var selectElement = document.getElementById("workingDays").value;
+        if (selectElement === "January") {
+            month = 01;
+            console.log(month);
+        } else if (selectElement === "February") {
+            month = 02;
+            console.log(month);
+        } else if (selectElement === "March") {
+            month = 03;
+            console.log(month);
+        }
+
+        // Define the request URL with parameters
+        var url = '/api/attendance/flutter/present?empname=' + encodeURIComponent(empname) + '&month=' + encodeURIComponent(month);
+
+        // Configure the request
+        xhr.open('GET', url);
+
+        // Set up event handler for when the request is complete
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Request was successful, handle the response
+                var totalPresentDays = xhr.responseText;
+                presentDaysInput.value = totalPresentDays;
+                console.log('Total present days:', totalPresentDays);
+                // You can do further processing with the result here
+            } else {
+                // Request failed, handle the error
+                console.error('Error:', xhr.statusText);
+            }
+        };
+
+        // Set up event handler for network errors
+        xhr.onerror = function () {
+            console.error('Request failed');
+        };
+
+        // Send the request
+        xhr.send();
+    }
+
+</script>
+
+<script>
+    function getTotalAbsentDays(empname, month) {
+        // Create a new XMLHttpRequest object
+        var xhr = new XMLHttpRequest();
+
+        var absentDaysInput = document.getElementById("absentDays");
+
+        var leaveDaysInput = document.getElementById("totalLeave");
+        var presentDaysInput = document.getElementById("totalPresent");
+
+        var workingDaysInput = document.getElementById("empworkingdays");
+        var finedInput = document.getElementById("fined");
+
+
+        // Calculate absent days
+        var totalWorkingDays = parseInt(workingDaysInput.value);
+        var totalpresentDays = parseInt(presentDaysInput.value);
+        var totalleaveDays = parseInt(leaveDaysInput.value);
+
+        var totalAbsentDays = parseInt(totalWorkingDays) - parseInt(totalpresentDays + totalleaveDays);
+        var finedamount = parseInt(totalAbsentDays) * 50;
+        absentDaysInput.value = totalAbsentDays;
+        finedInput.value = finedamount;
+
+        // empname = document.getElementById("empname").value;
+        // var selectElement = document.getElementById("workingDays").value;
+        //
+        // if (selectElement === "January") {
+        //     month = "01";
+        // } else if (selectElement === "February") {
+        //     month = "02";
+        // } else if (selectElement === "March") {
+        //     month = "03";
+        // }
+        //
+        // // Define the request URLs with parameters
+        // var url = '/api/leave/flutter/count?empname=' + encodeURIComponent(empname) + '&month=' + encodeURIComponent(month);
+        // var url2 = '/api/attendance/flutter/present?empname=' + encodeURIComponent(empname) + '&month=' + encodeURIComponent(month);
+        //
+        // // First request to fetch leave count
+        // xhr.open('GET', url);
+        // xhr.onload = function() {
+        //     if (xhr.status === 200) {
+        //         // Request was successful, handle the response
+        //         var leaveDays = parseInt(xhr.responseText);
+        //         // leaveDaysInput.value = leaveDays;
+        //
+        //         // Make second request to fetch present count
+        //         var xhr2 = new XMLHttpRequest();
+        //         xhr2.open('GET', url2);
+        //         xhr2.onload = function() {
+        //             if (xhr2.status === 200) {
+        //                 // Request was successful, handle the response
+        //                 var presentDays = parseInt(xhr2.responseText);
+        //                 // presentDaysInput.value = presentDays;
+        //
+        //                 // Calculate absent days
+        //                 // var totalWorkingDays = parseInt(workingDaysInput.value);
+        //                 // var totalpresentDays = parseInt(presentDaysInput.value);
+        //                 // var totalleaveDays = parseInt(leaveDaysInput.value);
+        //                 //
+        //                 // var totalAbsentDays =  parseInt(totalWorkingDays)- parseInt(totalpresentDays+totalleaveDays);
+        //                 // absentDaysInput.value = totalAbsentDays;
+        //                 console.log('Total absent days:', totalAbsentDays);
+        //             } else {
+        //                 // Request failed, handle the error
+        //                 console.error('Error:', xhr2.statusText);
+        //             }
+        //         };
+        //         xhr2.onerror = function() {
+        //             console.error('Request failed');
+        //         };
+        //         xhr2.send();
+        //     } else {
+        //         // Request failed, handle the error
+        //         console.error('Error:', xhr.statusText);
+        //     }
+        // };
+        //
+        // // Set up event handler for network errors
+        // xhr.onerror = function() {
+        //     console.error('Request failed');
+        // };
+        //
+        // // Send the first request
+        // xhr.send();
+    }
+
+</script>
+<script>
+
+    function calculate() {
+        var finedInput = document.getElementById("fined").value;
+        var bonusInput = document.getElementById("bonus").value;
+        var advanceInput = document.getElementById("advance").value;
+        var basicsalaryInput = document.getElementById("basicsalary").value;
+        var salaryInput = document.getElementById("salary");
+
+        // Parse input values to integers
+        var advance = parseInt(advanceInput, 10);
+        var bonus = parseInt(bonusInput, 10);
+        var fined = parseInt(finedInput, 10);
+        var basic = parseInt(basicsalaryInput, 10);
+
+        // Check if parsed values are NaN and replace them with 0 if NaN
+        advance = isNaN(advance) ? 0 : advance;
+        bonus = isNaN(bonus) ? 0 : bonus;
+        fined = isNaN(fined) ? 0 : fined;
+        basic = isNaN(basic) ? 0 : basic;
+
+        // Calculate total salary
+        var total = basic + bonus - fined - advance;
+
+        // Set total salary in the salary input
+        salaryInput.value = total;
+    }
+
+    // function calculate() {
+    //     var finedInput = document.getElementById("fined");
+    //     var bonusInput = document.getElementById("bonus");
+    //     var advanceInput = document.getElementById("advance");
+    //     var basicsalaryInput = document.getElementById("basicsalary");
+    //     var salaryInput = document.getElementById("salary");
+    //
+    //
+    //     var advance = parseInt(advanceInput);
+    //     var bonus = parseInt(bonusInput);
+    //     var fined = parseInt(finedInput);
+    //     var basic = parseInt(basicsalaryInput);
+    //     var total =basic;
+    //     console.log(total);
+    //     salaryInput.value = total;
+    //
+    //
+    // }
+</script>
+
+
+<script crossorigin="anonymous"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

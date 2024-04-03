@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Leave</title>
+    <!-- Bootstrap CSS -->
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" rel="stylesheet">
+    <style>
+        .table th,
+        .table td {
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+<aside >
+    <div th:insert="~{sidebar.html}" ></div>
+</aside>
+<div class="container">
+    <div class="row">
+        <!-- Second Row - Table -->
+        <div class="col-md-12">
+            <div>
+                <h5 class="text-center mb-4">Leave Details</h5>
+                <table class="table table-bordered">
+                    <thead class="text-center">
+                    <tr>
+                        <th>ID</th>
+                        <th>Employee Name</th>
+                        <th>Contact</th>
+                        <th>Leave Date</th>
+                        <th>Leave Reason</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="row, i : ${leaveList}">
+                        <td th:text="${i.index + 1}"></td>
+                        <td th:text="${row.employee.name}"></td>
+                        <td th:text="${row.contact}"></td>
+                        <td th:text="${row.leaveDate}"></td>
+                        <td th:text="${row.leaveReason}"></td>
+
+                        <td>
+                            <!-- Using Thymeleaf for conditional rendering -->
+                            <span class="badge bg-info" th:if="${not row.grant}">Pending</span>
+                            <span class="badge bg-success" th:if="${row.grant}">Approved</span>
+                        </td>
+
+
+
+                        <td>
+<!--                            <button class="btn btn-warning mx-1" th:if="${row != null}"-->
+<!--                                    th:href="@{'/leave/grant/' + ${row.id}}"-->
+<!--                                    th:disabled="${row != null and row.grant}">-->
+<!--                                Grant-->
+<!--                            </button>-->
+                            <form th:action="@{'/leave/grant/' + ${row.id}}" method="post">
+                                <input type="hidden" name="grant" th:value="${row.grant}" />
+                                <button type="submit" th:disabled="${row != null and row.grant}" class="btn btn-warning mx-1">Grant</button>
+                            </form>
+                        <td>
+
+<!--                        <button class="btn btn-warning mx-1" th:if="${row != null}"-->
+<!--                                th:href="@{'/leave/grant/' + ${row.id}}"-->
+<!--                                th:disabled="${row != null and row.grant}"-->
+<!--                                onclick="grantLeave('${row.id}')">Grant</button>-->
+
+
+                    </td>
+
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script crossorigin="anonymous"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-06fwefnKnhYzm3uoX3sYPpK3w3/nDRl0tqjt5z8HJCY8iK+jQGUp3FkzKgviyUoL"
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shCk+2l5dLev+6mGgffgPeWg4wo5aq0w6PwMW"
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    function grantLeave(leaveId, grantValue) {
+        // Prepare the data to send
+        const requestData = {
+            id: leaveId,
+            grant: grantValue
+        };
+
+        // Make a PUT request to your Spring Boot endpoint to grant leave
+        fetch('/leave/grant/' + leaveId, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestData) // Include the data in the request body
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                // Handle successful response
+                console.log('Leave granted successfully');
+                // Update UI to show approved
+                const grantButton = document.querySelector(`button[data-leave-id="${leaveId}"]`);
+                grantButton.disabled = true; // Disable the grant button
+                grantButton.insertAdjacentHTML('afterend', '<span class="badge bg-success">Approved</span>'); // Show approved badge
+            })
+            .catch(error => {
+                // Handle error
+                console.error('There was a problem with the fetch operation:', error);
+                // Display an error message or handle the error condition as needed
+            });
+    }
+
+</script>
+
+</body>
+
+</html>

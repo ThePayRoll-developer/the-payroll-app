@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Bonus Form</title>
+    <!-- Bootstrap CSS -->
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+          rel="stylesheet">
+    <style>
+        /* Form Section */
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 90vh;
+            margin-top: 25px;
+        }
+
+        /* Form Text */
+        .form-control {
+            font-size: 14px;
+        }
+
+        /* Table Data */
+        table.table td {
+            font-size: 13px;
+            padding: 0.7rem;
+        }
+
+    </style>
+</head>
+
+<body>
+<aside >
+    <div th:insert="~{sidebar.html}" ></div>
+</aside>
+<div class="container">
+    <!-- Form Section -->
+    <div class="row">
+        <div class="col">
+            <h2 class="text-center mb-4">Bonus Form</h2>
+            <div class="form-container">
+                <form method="post" th:action="@{/bonus/save}" th:object="${bonus}">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label >Name</label>
+                            <select class="form-control" id="employee" name="employee"
+                                    th:field="*{employee}">
+                                <option th:each="emp : ${employeeList}" th:text="${emp.name}"
+                                        th:value="${emp.id}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label >Amount</label>
+                            <input class="form-control" id="amount" name="amount" th:field="*{amount}" type="text">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label >Bonus Date</label>
+                            <input class="form-control" id="bonusDate" name="bonusDate" th:field="*{bonusDate}"
+                                   type="date">
+                        </div>
+
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-secondary mx-2" type="reset">Reset</button>
+                        <button class="btn btn-success mx-2" type="submit">Save</button>
+                        <button class="btn btn-warning mx-2" type="button">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table Section -->
+    <div class="row mt-2">
+        <div class="col">
+            <table class="table table-bordered table-striped">
+                <thead class="text-center">
+                <tr>
+                    <th>ID</th>
+                    <th>Employee Name</th>
+                    <th>Amount</th>
+                    <th>Bonus Date</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="bonus : ${bonusList}">
+                    <td th:text="${bonus.id}"></td>
+                    <td th:text="${bonus.employee?.name}"></td>
+                    <td th:text="${bonus.amount}"></td>
+                    <td th:text="${bonus.bonusDate}"></td>
+
+
+                    <td>
+                        <button class="btn btn-warning btn-sm mx-1" th:href="@{'/bonus/edit/'+${bonus.id}}">Update</button>
+                        <button class="btn btn-danger btn-sm mx-1" th:href="@{'/bonus/delete/'+${bonus.id}}">Delete</button>
+                    </td>
+<!--                    <a  class="btn btn-warning" th:href="@{'/buyers_edit/'+${si.id}}">Update</a>
+
+                    <a  class="btn btn-danger" th:href="@{'/buyers/delete/'+${si.id}}">Delete</a>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+// Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+        integrity="sha384-UYDnJv5BbAi5aLeZrCDtF3WwQI67tuGhj65qLOhFpUjrGC8NQpZlyIePSWBpYvWP"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7J..."
+        crossorigin="anonymous"></script>
+

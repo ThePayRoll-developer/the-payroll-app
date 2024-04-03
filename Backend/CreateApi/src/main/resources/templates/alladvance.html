@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advance</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+        .table th,
+        .table td {
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+<aside >
+    <div th:insert="~{sidebar.html}" ></div>
+</aside>
+<div class="container">
+    <div class="row">
+        <!-- Second Row - Table -->
+        <div class="col-md-12">
+            <div>
+                <h5 class="text-center mb-4">Advance Details</h5>
+                <table class="table table-bordered">
+                    <thead class="text-center">
+                    <tr>
+                        <th>ID</th>
+                        <th>Employee Name</th>
+                        <th>Amount</th>
+                        <th>Reason</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="row, i : ${advanceList}">
+                        <td th:text="${i.index + 1}"></td>
+                        <td th:text="${row.employee.name}"></td>
+                        <td th:text="${row.amount}"></td>
+                        <td th:text="${row.reason}"></td>
+                        <td th:text="${row.date}"></td>
+
+
+
+                        <td>
+                            <button class="btn btn-warning mx-1" th:onclick="'edit(' + ${row.id} + ')'">Edit</button>
+                            <button class="btn btn-danger mx-1" th:onclick="'delete(' + ${row.id} + ')'">Delete</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+        integrity="sha384-06fwefnKnhYzm3uoX3sYPpK3w3/nDRl0tqjt5z8HJCY8iK+jQGUp3FkzKgviyUoL"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shCk+2l5dLev+6mGgffgPeWg4wo5aq0w6PwMW"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
