@@ -92,7 +92,7 @@ class _SalaryScreenState extends State<SalaryScreen> {
             // Text(day.checkIn!),
             Text("Employee: ${data.employee?.name!}"),
             subtitle: Text("Salary Date: ${f.format(DateTime.parse(data.date!))} "
-                "\nSalary Amount: ${data.totalSalary}" ),
+                "\nBonus: ${data.empBonus}\nSalary Advance: ${data.empAdvance}\nSalary Amount: ${data.totalSalary}"),
 
             contentPadding:const EdgeInsets.all(10.0),
             // subtitle: Text(f.format(DateTime.parse(day.checkOut!))),
