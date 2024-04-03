@@ -41,6 +41,14 @@ public class EmployeeRestController {
 
     }
 
+    // flutter rest api
+    @GetMapping("/{email}")
+    public ResponseEntity<Employee> getEmployees(@PathVariable String email) {
+        Employee employees = employeeRepository.findByEmail(email);
+        return ResponseEntity.ok(employees);
+    }
+    // flutter rest api
+
 //    @PostMapping("")
 //    public ResponseEntity<String> saveEmployee(@RequestBody Employee employee){
 //

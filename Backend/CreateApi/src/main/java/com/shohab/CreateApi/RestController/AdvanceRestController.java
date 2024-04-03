@@ -61,6 +61,24 @@ public class AdvanceRestController {
         return ResponseEntity.ok(advances);
     }
 
+    // flutter rest api
+    @GetMapping("/{email}")
+    public ResponseEntity<List<Advance>> getAllAdvanceByEmp(@PathVariable String email) {
+        List<Advance> adv = advanceRepository.findAdvanceByEmp(email);
+        return ResponseEntity.ok(adv);
+    }
+
+    @PostMapping ("/flutter")
+    public ResponseEntity<Advance>saveEmpLeave(@RequestBody Advance advance){
+        String employeeName = advance.getEmployee().getName();
+        Employee employee = employeeRepository.findByName(employeeName).get();
+        advance.setEmployee(employee);
+        advanceRepository.save(advance);
+        return ResponseEntity.ok(advance);
+
+    }
+    // flutter rest api
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Advance> updateAdvance(@PathVariable Long id, @RequestBody Advance updatedAdvance) {

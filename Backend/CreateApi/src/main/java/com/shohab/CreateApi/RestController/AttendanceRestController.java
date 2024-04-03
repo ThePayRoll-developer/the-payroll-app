@@ -38,6 +38,47 @@ public class AttendanceRestController {
         return ResponseEntity.ok(attendances);
     }
 
+    // flutter rest api
+    @GetMapping("/{email}")
+    public ResponseEntity<List<Attendance>> getAllAttendanceByEmp(@PathVariable String email) {
+        List<Attendance> attendances = attendanceRep.findAttendanceByEmp(email);
+        return ResponseEntity.ok(attendances);
+    }
+
+    @GetMapping("/latest/{email}")
+    public ResponseEntity<List<Attendance>> getLatestAttendanceByEmp(@PathVariable String email) {
+        List<Attendance> attendances = attendanceRep.findLatestAttendanceByEmp(email);
+        return ResponseEntity.ok(attendances);
+    }
+
+
+
+    //not used
+    @PostMapping ("/{email}")
+    public ResponseEntity<Attendance>saveEmpAttendanceFlutter(@PathVariable String email){
+        if(email != null){
+            Employee employee = employeeRepository.findByEmail(email);
+            Attendance attendance = new Attendance();
+            attendance.setEmployee(employee);
+            attendanceRep.save(attendance);
+            return ResponseEntity.ok(attendance);
+
+        }else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping ("/flutter")
+    public ResponseEntity<Attendance>saveEmpAttendanceOg(@RequestBody Attendance attendance){
+        String employeeName = attendance.getEmployee().getName();
+        Employee employee = employeeRepository.findByName(employeeName).get();
+        attendance.setEmployee(employee);
+        attendanceRep.save(attendance);
+        return ResponseEntity.ok(attendance);
+
+    }
+    // flutter rest api
+
     @GetMapping("/present")
     public ResponseEntity<String> getTotalDays(@RequestParam("empname") String name, @RequestParam("month") String month){
 

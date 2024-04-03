@@ -100,6 +100,14 @@ public class SalaryRestController {
         return ResponseEntity.ok(salaries);
     }
 
+    // flutter rest api
+    @GetMapping("/emp/{email}")
+    public ResponseEntity<List<Salary>> getAllSalaryByEmp(@PathVariable String email) {
+        List<Salary> salaries = salaryRepository.findSalaryByEmp(email);
+        return ResponseEntity.ok(salaries);
+    }
+    // flutter rest api
+
 
     // Update method
     @PutMapping("/{id}")

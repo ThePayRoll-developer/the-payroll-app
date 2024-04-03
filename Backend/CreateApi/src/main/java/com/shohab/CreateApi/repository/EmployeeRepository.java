@@ -18,5 +18,8 @@ public interface EmployeeRepository extends JpaRepository<Employee ,Long> {
     public List<Object[]>findEmployeeDetails();
     List<Employee> findByDepartmentId(int id);
 
+    @Query("select e from  Employee e where e.email =?1")
+    Employee findByEmail(String email);
+
 
 }

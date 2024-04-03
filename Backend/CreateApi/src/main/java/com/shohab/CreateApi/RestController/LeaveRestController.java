@@ -28,6 +28,24 @@ public class LeaveRestController {
         return ResponseEntity.ok(leaves);
     }
 
+    // flutter rest api
+    @GetMapping("/{email}")
+    public ResponseEntity<List<Leave>> getAllLeaveByEmp(@PathVariable String email) {
+        List<Leave> attendances = leaveRepository.findLeaveByEmp(email);
+        return ResponseEntity.ok(attendances);
+    }
+
+    @PostMapping ("/flutter")
+    public ResponseEntity<Leave>saveEmpLeave(@RequestBody Leave leave){
+        String employeeName = leave.getEmployee().getName();
+        Employee employee = employeeRepository.findByName(employeeName).get();
+        leave.setEmployee(employee);
+        leaveRepository.save(leave);
+        return ResponseEntity.ok(leave);
+
+    }
+    // flutter rest api
+
     // GET a leave by ID
 //    @GetMapping("/{id}")
 //    public ResponseEntity<Leave> getLeaveById(@PathVariable int id) {

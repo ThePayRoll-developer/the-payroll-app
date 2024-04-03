@@ -24,7 +24,7 @@ public class BonusRestController {
     private EmployeeRepository employeeRepository;
 
 
-//    @PostMapping("")
+    //    @PostMapping("")
 //    public ResponseEntity<String> saveBonus(@RequestBody Bonus request) {
 //        String employeeName = request.getEmployee().getName();
 //        BigDecimal amount = request.getAmount();
@@ -52,7 +52,13 @@ public class BonusRestController {
 //
 //        return ResponseEntity.ok("Bonus saved successfully.");
 //    }
-
+// flutter rest api
+    @GetMapping("/{email}")
+    public ResponseEntity<List<Bonus>> getAllBonusByEmp(@PathVariable String email) {
+        List<Bonus> bonus = bonusRepository.findBonusByEmp(email);
+        return ResponseEntity.ok(bonus);
+    }
+// flutter rest api
 
     @PostMapping("")
     public ResponseEntity<String> saveBonus(@RequestBody Bonus request) {
