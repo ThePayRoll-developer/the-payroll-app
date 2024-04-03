@@ -99,8 +99,8 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
             title:
             // Text(day.checkIn!),
             Text("Employee: ${day.employee?.name!}"),
-            subtitle: Text("Check In: ${f.format(DateTime.parse(day.checkIn!))} "
-                "\nCheck Out: ${f.format(DateTime.parse(day.checkOut!))}" ),
+            subtitle: Text("Check In: ${f.format(DateTime.parse(day.checkIn!).toLocal(),)} "
+                "\nCheck Out: ${f.format(DateTime.parse(day.checkOut!).toLocal(),)}" ),
 
             contentPadding:const EdgeInsets.all(10.0),
             // subtitle: Text(f.format(DateTime.parse(day.checkOut!))),
