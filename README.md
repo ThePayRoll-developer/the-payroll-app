@@ -59,3 +59,10 @@ The Flutter app simplifies employee management by offering features such as atte
 | Leave Request Status | :pushpin: Start up:![ start up](https://github.com/ThePayRoll-developer/the-payroll-app/blob/main/flutter_image/Payroll%20(11).png) | :pushpin: Splash screen:![ start up](https://github.com/ThePayRoll-developer/the-payroll-app/blob/main/flutter_image/a_leave2.JPG) |
 | Salary | :pushpin: Start up:![ start up](https://github.com/ThePayRoll-developer/the-payroll-app/blob/main/flutter_image/Payroll%20(14).png) | :pushpin: Splash screen:![ start up](https://github.com/ThePayRoll-developer/the-payroll-app/blob/main/flutter_image/a_salary.JPG) |
 | Salary update | :pushpin: Start up:![ start up](https://github.com/ThePayRoll-developer/the-payroll-app/blob/main/flutter_image/Payroll.png) | :pushpin: Splash screen:![ start up](https://github.com/ThePayRoll-developer/the-payroll-app/blob/main/flutter_image/a_salary2.JPG) |
+
+**"Suggestions and project Improvements are always Invited!"**  
+Thanks a lot,    
+Project Members
+[Al Mamun](https://github.com/dcinmamun)
+[Shohab Sikder](https://github.com/ShohabSikder)
+[Fatema Tuz Zohora](https://github.com/fatemazohor)
