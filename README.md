@@ -1,5 +1,5 @@
 # The Payroll Flutter App
-
+The Flutter app simplifies employee management by offering features such as attendance tracking, salary and bonus checking, advance salary requests, and leave management. Employees can conveniently log in to record attendance, access salary details, request advances, and submit leave requests, enhancing productivity and efficiency in the workplace.
 
 -----------------   ---------------------------------------------
 ## There are 2 users in the system
