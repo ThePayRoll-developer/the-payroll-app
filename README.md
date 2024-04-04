@@ -23,20 +23,21 @@
 
 ## Technologies used:-
 ### Front-End Development:
-- [<img src="https://github.com/fatemazohor/fatemazohor/blob/main/svg/html5.svg" width="40" height="40">](https://github.com/fatemazohor)
-- [<img src="https://github.com/fatemazohor/fatemazohor/blob/main/svg/css3.svg" width="40" height="40">](https://github.com/fatemazohor) 
-- [<img src="https://github.com/fatemazohor/fatemazohor/blob/main/svg/bootstrap-logo-shadow.png" width="40" height="40">](https://github.com/fatemazohor)
-- [<img src="https://github.com/fatemazohor/fatemazohor/blob/main/svg/javascript.svg" width="40" height="40">](https://github.com/fatemazohor)
-- [<img src="https://github.com/fatemazohor/fatemazohor/blob/main/svg/thymleaf.png" width="40" height="40">](#)
+
+- [<img src="https://github.com/fatemazohor/fatemazohor/blob/main/svg/Flutter.jpg" width="40" height="40">](#) 
 ### Back-End Development
-- [<img src="https://github.com/fatemazohor/fatemazohor/blob/main/svg/spring_boot.svg" width="40" height="40">](https://github.com/fatemazohor)
-- [<img src="https://github.com/fatemazohor/fatemazohor/blob/main/svg/hibernate.png" width="40" height="40">](https://github.com/fatemazohor)
-- [<img src="https://github.com/fatemazohor/SwingSMEManagement/blob/main/Screenshot/mysql.png" width="40" height="40">](https://github.com/fatemazohor) 
+- [<img src="https://github.com/fatemazohor/fatemazohor/blob/main/svg/spring_boot.svg" width="40" height="40">](#)
+- [<img src="https://github.com/fatemazohor/fatemazohor/blob/main/svg/hibernate.png" width="40" height="40">](#)
+- [<img src="https://github.com/fatemazohor/fatemazohor/blob/main/svg/thymleaf.png" width="40" height="40">](#)
+- [<img src="https://github.com/fatemazohor/fatemazohor/blob/main/svg/html5.svg" width="40" height="40">](#)
+- [<img src="https://github.com/fatemazohor/fatemazohor/blob/main/svg/css3.svg" width="40" height="40">](#) 
+- [<img src="https://github.com/fatemazohor/fatemazohor/blob/main/svg/bootstrap-logo-shadow.png" width="40" height="40">](#)
+- [<img src="https://github.com/fatemazohor/fatemazohor/blob/main/svg/javascript.svg" width="40" height="40">](#)
 
 **==== Software And Tools Required ======**
 - :  MySQL
 - :  IntelliJ IDEA
-- :  Visual Studio
+- :  Android Studio
 - :  Spring Initializer
 - :  Java JDK 17+
 
