@@ -106,7 +106,7 @@ class _LeaveScreenState extends State<LeaveScreen> {
             title:
             // Text(day.checkIn!),
             Text("Employee: ${data.employee?.name!}"),
-            subtitle: Text("Leave Date: ${f.format(DateTime.parse(data.leaveDate!))} \nLeave Reason: ${data.leaveReason}\nLeave Grant: ${isGranted(data.grant!)}" ),
+            subtitle: Text("Leave Date: ${f.format(DateTime.parse(data.leaveDate!).toLocal())} \nLeave Reason: ${data.leaveReason}\nLeave Grant: ${isGranted(data.grant!)}" ),
 
             contentPadding:const EdgeInsets.all(10.0),
             // subtitle: Text(f.format(DateTime.parse(day.checkOut!))),

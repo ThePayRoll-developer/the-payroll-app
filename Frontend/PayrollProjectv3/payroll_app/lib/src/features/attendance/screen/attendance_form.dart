@@ -180,7 +180,7 @@ class _AttendanceFormState extends State<AttendanceForm> {
                                       ),
                                       style: TextStyle(
                                         fontSize: screenWidth / 32,
-                                        color: tSecondaryColor,
+                                        color: isDarkMode ?  tWhiteColor : tSecondaryColor ,
                                       ),
                                     ),
                                   );

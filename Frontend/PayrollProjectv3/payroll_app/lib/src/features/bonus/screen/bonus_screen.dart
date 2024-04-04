@@ -39,7 +39,7 @@ class _BonusScreenState extends State<BonusScreen> {
         leading: IconButton(
             onPressed: () => Get.back(),
             icon: const Icon(LineAwesomeIcons.angle_left)),
-        title: Text("Recent Attendance List",
+        title: Text("Recent Salary's Bonus List",
             style: Theme.of(context).textTheme.headlineMedium),
       ),
       body:Center(
@@ -91,7 +91,7 @@ class _BonusScreenState extends State<BonusScreen> {
             title:
             // Text(day.checkIn!),
             Text("Employee: ${data.employee?.name!}"),
-            subtitle: Text("Bonus Date: ${f.format(DateTime.parse(data.bonusDate!))} "
+            subtitle: Text("Bonus Date: ${f.format(DateTime.parse(data.bonusDate!).toLocal())} "
                 "\nBonus Amount: ${data.amount}" ),
 
             contentPadding:const EdgeInsets.all(10.0),
