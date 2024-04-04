@@ -3,4 +3,4 @@
 
 |Featurs|Employee|Admin|
 | :---: | :---: | :---: |
-| Welcome | :pushpin: Start up:![ start up](https://github.com/fatemazohor/MyChat_Android_app/blob/main/README.md) | :pushpin: Splash screen:![ start up](https://github.com/fatemazohor/MyChat_Android_app/blob/main/README.md) |
+| Welcome | :pushpin: Start up:![ start up](https://github.com/ThePayRoll-developer/the-payroll-app/blob/main/flutter_image/Payroll.png) | :pushpin: Splash screen:![ start up](https://github.com/ThePayRoll-developer/the-payroll-app/blob/main/flutter_image/Payroll.png) |
